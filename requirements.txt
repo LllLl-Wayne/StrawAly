@@ -1,0 +1,17 @@
+# 草莓生长溯源项目依赖包
+
+# 核心依赖
+mysql-connector-python==8.2.0
+qrcode==7.4.2
+Pillow==10.0.1
+python-dotenv==1.0.0
+
+# Web框架依赖
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# AI 测试依赖（用于生成示例图像）
+numpy==1.24.3
+
+# 可选依赖（用于二维码检测优化）
+# zbar-py==1.0.4  # 如果 pyzbar 安装有问题可以尝试这个

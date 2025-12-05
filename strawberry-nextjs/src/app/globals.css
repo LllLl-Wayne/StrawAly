@@ -1,0 +1,622 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  }
+  
+  .dark .glass-effect {
+    background: rgba(17, 25, 40, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .blur-bg {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .dark .blur-bg {
+    background: rgba(17, 25, 40, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .blur-bg:hover {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .dark .blur-bg:hover {
+    background: rgba(17, 25, 40, 0.6);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    min-height: 100vh;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 dark:bg-gray-900/80 dark:border-gray-700/20;
+  }
+  
+  /* 深色模式下统一表单元素背景色 */
+  .dark button,
+  .dark select {
+    @apply bg-gray-800 border-gray-700;
+  }
+  
+  .dark button:hover,
+  .dark select:hover {
+    @apply bg-gray-700;
+  }
+  
+  /* 深色模式下统一文字颜色为浅色 */
+  .dark label,
+  .dark td,
+  .dark div,
+  .dark span {
+    @apply text-foreground;
+  }
+  
+  /* 暗色模式下次要文字使用稍深的浅色 */
+  .dark .text-gray-600,
+  .dark .text-gray-700 {
+    @apply text-muted-foreground;
+  }
+  
+  /* 确保input元素文字显示为深色 */
+  input {
+    @apply text-foreground;
+  }
+  
+  /* 确保textarea在深色模式下文字显示为深色 */
+  .dark textarea {
+    @apply text-gray-900;
+  }
+  
+  /* 密码输入框的占位符文字颜色 */
+  input::placeholder {
+    @apply text-muted-foreground;
+  }
+  
+  .gradient-bg {
+    background: linear-gradient(135deg, #DCF7FA 0%, #FFE5D9 100%);
+  }
+  
+  .status-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .status-active {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400;
+  }
+  
+  .status-inactive {
+    @apply bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300;
+  }
+  
+  .status-harvested {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400;
+  }
+  
+  .status-healthy {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400;
+  }
+  
+  .status-warning {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400;
+  }
+  
+  .status-sick {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400;
+  }
+.status-dead {
+  @apply bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400;
+}
+  
+  .status-seedling {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400;
+  }
+  
+  .status-flowering {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400;
+  }
+  
+  .status-fruiting {
+    @apply bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400;
+  }
+  
+  .status-ripening {
+    @apply bg-pink-100 text-pink-800 dark:bg-pink-900/20 dark:text-pink-400;
+  }
+  
+  /* 图标颜色类 - 像浅色模式一样规划深色模式图标样式 */
+  /* 主图标颜色 */
+  .icon-primary {
+    @apply text-primary;
+  }
+  
+  /* 次要图标颜色 */
+  .icon-secondary {
+    @apply text-secondary-foreground;
+  }
+  
+  /* 成功状态图标颜色 */
+  .icon-success {
+    @apply text-green-600 dark:text-green-400;
+  }
+  
+  /* 警告状态图标颜色 */
+  .icon-warning {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+  
+  /* 危险状态图标颜色 */
+  .icon-danger {
+    @apply text-red-600 dark:text-red-400;
+  }
+  
+  /* 信息状态图标颜色 */
+  .icon-info {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+  
+  /* 紫色图标颜色 */
+  .icon-purple {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+  
+  /* 粉色图标颜色 */
+  .icon-pink {
+    @apply text-pink-600 dark:text-pink-400;
+  }
+  
+  /* 橙色图标颜色 */
+  .icon-orange {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+  
+  /* 默认图标颜色 - 用于通用图标 */
+  .icon-default {
+    @apply text-muted-foreground;
+  }
+  
+  /* 快速操作卡片中的特定图标颜色 */
+  .dark .quick-action-card .scan-icon svg,
+  .dark .quick-action-card [class*="scan"][class*="icon"] svg {
+    @apply text-[#2563EB] !important;
+  }
+  
+  .dark .quick-action-card .refresh-icon svg,
+  .dark .quick-action-card [class*="refresh"][class*="icon"] svg {
+    @apply text-[#9333EA] !important;
+  }
+  
+  .status-mature {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400;
+  }
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.dark .ant-color-picker-trigger-text,
+.dark .ant-color-picker-trigger-text-cell {
+  color: rgba(248, 250, 252, 0.95) !important; /* 近白色 */
+}
+
+/* 设置页深色模式表单统一背景与文字颜色 */
+.dark .settings-card input[type="text"],
+.dark .settings-card input[type="password"],
+.dark .settings-card input[type="number"],
+.dark .settings-card textarea,
+.dark .settings-card select {
+  background-color: #0f172a; /* 与 select 同色（深色） */
+  color: #f8fafc; /* 浅色文字 */
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.dark .settings-card input::placeholder,
+.dark .settings-card textarea::placeholder {
+  color: rgba(248, 250, 252, 0.7);
+}
+.dark .settings-card option { color: #111827; }
+
+/* 调色盘（AntD ColorPicker）在设置卡片中的前景/背景样式 */
+.settings-card .ant-color-picker-trigger {
+  background-color: #ffffff; /* 浅色模式：白底 */
+}
+.dark .settings-card .ant-color-picker-trigger {
+  background-color: #0f172a; /* 深色模式：与输入保持一致 */
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.settings-card .ant-color-picker-color-block-inner {
+  border-radius: 0.5rem;
+}
+.dark .settings-card .ant-color-picker-color-block-inner {
+  border-radius: 0.5rem;
+  outline: 1px solid rgba(255, 255, 255, 0.12);
+}
+.settings-card .ant-color-picker-trigger-text,
+.settings-card .ant-color-picker-trigger-text-cell {
+  color: rgba(17, 24, 39, 0.9) !important; /* 浅色模式：深色文字 */
+}
+.dark .settings-card .ant-color-picker-trigger-text,
+.dark .settings-card .ant-color-picker-trigger-text-cell {
+  color: rgba(248, 250, 252, 0.95) !important;
+}
+
+.dark .ant-color-picker-panel .ant-segmented-item-label {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+.dark .ant-color-picker-panel .ant-segmented-item-selected .ant-segmented-item-label {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+.dark .ant-color-picker-panel .ant-color-picker-input-label {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+.dark .ant-color-picker-panel .ant-select-selection-item,
+.dark .ant-color-picker-panel .ant-select-selection-placeholder {
+  color: #000000 !important;
+  opacity: 1 !important;
+}
+.dark .ant-color-picker-panel input[type="text"],
+.dark .ant-color-picker-panel .ant-input {
+  color: #000000 !important;
+}
+.dark .ant-color-picker-panel input::placeholder {
+  color: #000000 !important;
+}
+.dark .ant-select-dropdown .ant-select-item-option-content {
+  color: #000000 !important;
+}
+.dark .ant-select-dropdown .ant-select-item-option-active .ant-select-item-option-content {
+  color: #000000 !important;
+}
+
+/* 主题开关（antd Switch）样式：浅色模式背景浅灰、文字深灰；深色模式仍使用强调色 */
+.theme-toggle-switch:not(.ant-switch-checked) {
+  background-color: #e5e7eb !important; /* 浅灰 */
+  border-color: #e5e7eb !important;
+}
+.theme-toggle-switch .ant-switch-inner-unchecked {
+  color: #374151 !important; /* 深灰文字 */
+}
+.theme-toggle-switch.ant-switch-checked .ant-switch-inner-checked {
+  color: #ffffff !important; /* 深色模式下文本白色 */
+}
+
+/* 响应式表格 */
+@media (max-width: 768px) {
+  .responsive-table {
+    @apply block overflow-x-auto whitespace-nowrap;
+  }
+  
+  .responsive-table table {
+    @apply min-w-full;
+  }
+}
+.dark .scan-card textarea,
+.dark .scan-card select,
+.dark .scan-card input[type="text"],
+.dark .scan-card input[type="number"],
+.dark .scan-card input[type="password"] {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.dark .scan-card textarea::placeholder,
+.dark .scan-card input::placeholder {
+  color: rgba(248, 250, 252, 0.7) !important;
+}
+.warning-tip { text-shadow: 0 1px 2px rgba(55, 65, 81, 0.4); }
+.dark .warning-tip { text-shadow: 0 1px 2px rgba(229, 231, 235, 0.4); }
+
+.dark textarea {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.dark textarea::placeholder {
+  color: rgba(248, 250, 252, 0.7) !important;
+}
+.light-pillar-base {
+  background: transparent;
+}
+html:not(.dark) .light-pillar-base {
+  background: #ffffff;
+}
+
+/* 全局亚克力层，覆盖背景（不遮挡内容） */
+.acrylic-overlay {
+  pointer-events: none;
+  backdrop-filter: blur(40px) saturate(1.25) brightness(1.08) contrast(0.95);
+  -webkit-backdrop-filter: blur(40px) saturate(1.25) brightness(1.08) contrast(0.95);
+  background: rgba(255, 255, 255, 0.16);
+  position: fixed;
+  inset: 0;
+}
+.dark .acrylic-overlay {
+  background: rgba(17, 24, 39, 0.18);
+}
+
+.acrylic-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 3px 3px, 4px 4px;
+  background-position: 0 0, 1px 1px;
+  opacity: 0.22;
+}
+.dark .acrylic-overlay::before {
+  background-image:
+    radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.08) 1px, transparent 1px);
+  opacity: 0.18;
+}
+
+/* 高光条纹，增强材质感 */
+.acrylic-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(120deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 35%, rgba(255,255,255,0) 60%),
+    linear-gradient(300deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 50%);
+  mix-blend-mode: screen;
+}
+.dark .acrylic-overlay::after {
+  background-image:
+    linear-gradient(120deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.03) 35%, rgba(255,255,255,0) 60%),
+    linear-gradient(300deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 50%);
+}
+.title-glass {
+  @apply inline-flex items-center gap-3 px-4 py-2 rounded-lg border backdrop-blur-md;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.dark .title-glass {
+  background-color: rgba(31, 41, 55, 0.8);
+  border-color: rgba(75, 85, 99, 0.3);
+}
+
+.title-bar {
+  @apply flex items-center justify-between px-4 py-3 rounded-xl border backdrop-blur-md;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+.dark .title-bar {
+  background-color: rgba(31, 41, 55, 0.8);
+  border-color: rgba(75, 85, 99, 0.3);
+}
+
+/* 标题区文本颜色：浅色黑、深色白 */
+.title-bar h1,
+.title-glass h1 {
+  color: #111827 !important; /* 黑色（浅色模式） */
+}
+.dark .title-bar h1,
+.dark .title-glass h1 {
+  color: #ffffff !important; /* 白色（深色模式） */
+}
+.dark .title-bar p,
+.dark .title-glass p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.dark .ant-select-selector {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.dark .ant-select-selection-item,
+.dark .ant-select-selection-placeholder {
+  color: #f8fafc !important;
+}
+.dark .ant-select-arrow {
+  color: #f8fafc !important;
+}
+.dark .ant-select-dropdown {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+}
+.dark .ant-select-dropdown .ant-select-item-option-content,
+.dark .ant-select-dropdown .ant-select-item-option {
+  color: #ffffff !important;
+}
+.dark .ant-select-item-option-active,
+.dark .ant-select-item-option-selected {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark .ant-select-dropdown .ant-select-item-option-active .ant-select-item-option-content,
+.dark .ant-select-dropdown .ant-select-item-option-selected .ant-select-item-option-content {
+  color: #ffffff !important;
+}
+.dark .ant-pagination {
+  color: #f8fafc !important;
+}
+.dark .ant-pagination .ant-pagination-item {
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.dark .ant-pagination .ant-pagination-item a {
+  color: #f8fafc !important;
+}
+.dark .ant-pagination .ant-pagination-item-active {
+  background-color: #0f172a !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.dark .ant-pagination .ant-pagination-prev .ant-pagination-item-link,
+.dark .ant-pagination .ant-pagination-next .ant-pagination-item-link {
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: transparent !important;
+}
+.dark .ant-pagination-simple .ant-pagination-simple-pager {
+  color: #f8fafc !important;
+}
+.dark .ant-pagination-simple .ant-pagination-simple-pager input {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+:root { --accent-color: #EC4899; --accent-foreground: #ffffff; }
+.accent-text { color: var(--accent-color) !important; }
+.accent-border { border-color: var(--accent-color) !important; }
+.accent-bg { background-color: var(--accent-color) !important; }
+
+/* 固定按钮文本颜色：浅色黑、深色白 */
+.btn-fixed-text { color: #111827 !important; }
+.dark .btn-fixed-text { color: #ffffff !important; }
+
+/* 霓虹绿色主按钮样式 */
+.btn-neon {
+  background-color: #00e95a !important;
+  color: #ffffff !important;
+  border-color: #00e95a !important;
+  box-shadow: 0 0 12px rgba(0, 233, 90, 0.45) !important;
+}
+.btn-neon:hover {
+  filter: brightness(1.05);
+}
+/* 主题色按钮，随主题变换背景与前景 */
+.btn-accent {
+  background-color: var(--accent-color) !important;
+  color: var(--accent-foreground) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: none !important;
+}
+.btn-accent:hover { filter: brightness(1.05); }
+.btn-accent .anticon,
+.btn-accent .anticon > svg,
+.btn-accent svg {
+  color: var(--accent-foreground) !important;
+  stroke: var(--accent-foreground) !important;
+  fill: currentColor !important;
+}
+.btn-accent svg *,
+.btn-accent .anticon svg * {
+  stroke: currentColor !important;
+  fill: currentColor !important;
+}
+.btn-accent .ant-btn-icon { margin-inline-end: 8px; }
+.btn-accent span { color: var(--accent-foreground) !important; }
+.dark .qa-reload-icon { color: #5b21b6 !important; }
+.btn-sync svg, .btn-sync .anticon, .btn-sync .anticon svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+  fill: currentColor !important;
+}
